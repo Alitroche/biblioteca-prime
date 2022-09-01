@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuItem, PrimeIcons } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'biblioteca-prime';
+  
+  items: MenuItem[] = [
+    {
+      label: "Biblioteca",
+      icon: PrimeIcons.BOOK,
+      items: [
+        { 
+          label: "Libros",
+          icon: PrimeIcons.BOOKMARK
+      },
+        
+        { 
+          label: "Autores",
+          icon: PrimeIcons.USERS
+        }
+      ]
+    }
+  ];
+
 }

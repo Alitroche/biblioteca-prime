@@ -1,1 +1,18 @@
-<p>Estoy en el componente Libros</p>
+<p-table [value]="listaLibros" [loading]="cargando">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Código</th>
+            <th>Titulo</th>
+            <th>Autor</th>
+            <th>Nro.Página</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-libro>
+        <tr>
+            <td>{{ libro.id }}</td>
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.autor }}</td>
+            <td>{{ libro.paginas }}</td>
+        </tr>
+    </ng-template>
+</p-table>

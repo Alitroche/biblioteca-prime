@@ -1,3 +1,12 @@
+<div class="tarjeta">
+    <div style="margin-bottom: 15px">
+    <button 
+    pButton 
+    label="Agregar" 
+    icon="pi pi-plus" 
+    (click)="mostrarDialogo()">
+    </button>
+</div>
 <p-table [value]="listaLibros" [loading]="cargando">
     <ng-template pTemplate="header">
         <tr>
@@ -16,3 +25,10 @@
         </tr>
     </ng-template>
 </p-table>
+</div>
+<p-dialog 
+    header="Registrar Libro"
+    [(visible)]="dialogoVisible"
+    [modal]="true">
+    <app-formulario-libro></app-formulario-libro>
+</p-dialog>

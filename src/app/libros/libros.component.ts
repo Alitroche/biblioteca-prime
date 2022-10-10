@@ -11,6 +11,7 @@ export class LibrosComponent implements OnInit {
 
   listaLibros: Libro[] = [];
   cargando: boolean = false;
+  dialogoVisible: boolean = false;
 
   constructor(
     private servicioLibros: LibrosService
@@ -32,5 +33,9 @@ export class LibrosComponent implements OnInit {
         this.cargando = false;
       }
     });
+  }
+
+  mostrarDialogo(){
+    this.dialogoVisible = true;
   }
 }

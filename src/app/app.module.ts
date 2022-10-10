@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
@@ -9,12 +9,21 @@ import { LibrosComponent } from './libros/libros.component';
 import { AutoresComponent } from './autores/autores.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
+import { CardModule } from 'primeng/card';
+import { DialogModule } from 'primeng/dialog';
+import { FormularioLibroComponent } from './libros/formulario-libro/formulario-libro.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
+import { MessageModule  } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [
     AppComponent,
     LibrosComponent,
-    AutoresComponent
+    AutoresComponent,
+    FormularioLibroComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +31,15 @@ import { TableModule } from 'primeng/table';
     ButtonModule,
     MenubarModule,
     HttpClientModule,
-    TableModule
+    TableModule,
+    CardModule,
+    DialogModule,
+    BrowserAnimationsModule,
+    InputTextModule,
+    InputNumberModule,
+    FormsModule,
+    MessageModule,
+    MessagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

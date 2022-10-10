@@ -7,7 +7,9 @@
     (click)="mostrarDialogo()">
     </button>
 </div>
-<p-table [value]="listaLibros" [loading]="cargando">
+<p-messages [(value)]="mensajes"></p-messages>
+<p-table [value]="listaLibros" [loading]="cargando" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
+responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
             <th>Código</th>
@@ -30,5 +32,5 @@
     header="Registrar Libro"
     [(visible)]="dialogoVisible"
     [modal]="true">
-    <app-formulario-libro></app-formulario-libro>
+    <app-formulario-libro (regargarLibros)="cargarLibros()"></app-formulario-libro>
 </p-dialog>

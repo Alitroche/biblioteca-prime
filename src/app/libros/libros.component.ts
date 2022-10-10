@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Message } from 'primeng/api';
 import { Libro} from '../interfaces/libro.interfaces';
 import { LibrosService } from '../servicios/libros.service';
 
@@ -12,6 +13,8 @@ export class LibrosComponent implements OnInit {
   listaLibros: Libro[] = [];
   cargando: boolean = false;
   dialogoVisible: boolean = false;
+
+  mensajes: Message[] = [];
 
   constructor(
     private servicioLibros: LibrosService
@@ -31,6 +34,7 @@ export class LibrosComponent implements OnInit {
       error: (e) => {
         console.log(e);
         this.cargando = false;
+        this.mensajes = [{severity: 'error', summary: 'Error al cargar libros', detail:e.error}]
       }
     });
   }

@@ -23,6 +23,10 @@ export class FormularioLibroComponent implements OnInit {
  guardado: boolean =false;
  mensajes: Message[] = [];
 
+
+ modo: 'Registrar' | 'Editar' = 'Registrar';
+
+
  @Output()
  recargarLibros: EventEmitter<boolean> = new EventEmitter();
 
@@ -43,25 +47,51 @@ export class FormularioLibroComponent implements OnInit {
         paginas: this.paginas
 
       }
-
-      this.guardado = true;
-      this.servicioLibros.post(libro).subscribe({
-        next: () => {
-          this.guardado = false;
-          this.mensajes=[{severity: 'success', summary: 'Éxito', detail: 'Se registro el libro'}];
-          this.recargarLibros.emit(true);
-
-        },
-        error: (e) => {
-          this.guardado = false;
-          console.log(e);
-          this.mensajes=[{severity: 'error', summary: 'Error al registrar', detail: e.error}];
-
-        },
-        
-      });
+      if(this.modo === 'Registrar'){
+        this.registrar(libro);
+      }else{
+        this.editar(libro);
+      }
 
     }
+  }
+
+  private registrar(libro: Libro){
+
+    this.guardado = true;
+    this.servicioLibros.post(libro).subscribe({
+      next: () => {
+        this.guardado = false;
+        this.mensajes=[{severity: 'success', summary: 'Éxito', detail: 'Se registro el libro'}];
+        this.recargarLibros.emit(true);
+
+      },
+      error: (e) => {
+        this.guardado = false;
+        console.log(e);
+        this.mensajes=[{severity: 'error', summary: 'Error al registrar', detail: e.error}];
+
+      },
+      
+    });
+
+  }
+  private editar(libro: Libro){
+    this.guardado = true;
+    this.servicioLibros.put(libro).subscribe({
+      next: () => {
+        this.guardado = false;
+        this.mensajes = [{ severity: 'sucess' , summary: 'Éxito', detail: 'Se edito el Libro'}];
+        this.recargarLibros.emit(true);
+      },
+      error: (e) =>{
+      this.guardado = false;
+      console.log(e);
+      this.mensajes = [{severity: 'error', summary: 'Error al editar' , detail: e.error}];
+      }
+
+    });
+
   }
   
   validar():boolean{

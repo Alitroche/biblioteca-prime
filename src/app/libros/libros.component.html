@@ -4,7 +4,7 @@
     pButton 
     label="Agregar" 
     icon="pi pi-plus" 
-    (click)="mostrarDialogo()">
+    (click)="nuevo()">
     </button>
 </div>
 <p-messages [(value)]="mensajes"></p-messages>
@@ -16,6 +16,7 @@ responsiveLayout="scroll">
             <th>Titulo</th>
             <th>Autor</th>
             <th>Nro.Página</th>
+            <th>Acciones</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-libro>
@@ -24,13 +25,17 @@ responsiveLayout="scroll">
             <td>{{ libro.titulo }}</td>
             <td>{{ libro.autor }}</td>
             <td>{{ libro.paginas }}</td>
+            <td>
+                <button pButton trype="button" icon="pi pi-pencil" style="margin-right:5px;" (click)="editar(libro)"></button>
+                <button pButton type="button" icon="pi pi-trash" class="p-button-danger"></button>
+            </td>
         </tr>
     </ng-template>
 </p-table>
 </div>
 <p-dialog 
-    header="Registrar Libro"
+    [header]="tituloDialogo"
     [(visible)]="dialogoVisible"
     [modal]="true">
-    <app-formulario-libro (regargarLibros)="cargarLibros()"></app-formulario-libro>
+    <app-formulario-libro #formulario (regargarLibros)="cargarLibros()"></app-formulario-libro>
 </p-dialog>

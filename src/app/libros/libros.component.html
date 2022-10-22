@@ -27,7 +27,7 @@ responsiveLayout="scroll">
             <td>{{ libro.paginas }}</td>
             <td>
                 <button pButton trype="button" icon="pi pi-pencil" style="margin-right:5px;" (click)="editar(libro)"></button>
-                <button pButton type="button" icon="pi pi-trash" class="p-button-danger"></button>
+                <button pButton type="button" icon="pi pi-trash" class="p-button-danger" (click)="eliminar(libro)"></button>
             </td>
         </tr>
     </ng-template>
@@ -39,3 +39,4 @@ responsiveLayout="scroll">
     [modal]="true">
     <app-formulario-libro #formulario (regargarLibros)="cargarLibros()"></app-formulario-libro>
 </p-dialog>
+<p-confirmDialog header="confirmar" icon="pi pi-exclamation-triangle"></p-confirmDialog>

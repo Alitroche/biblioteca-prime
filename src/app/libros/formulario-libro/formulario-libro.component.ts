@@ -78,8 +78,9 @@ export class FormularioLibroComponent implements OnInit {
   }
   private editar(libro: Libro){
     this.guardado = true;
-    this.servicioLibros.put(libro).subscribe({
+    this.servicioLibros.put (libro).subscribe({
       next: () => {
+        
         this.guardado = false;
         this.mensajes = [{ severity: 'sucess' , summary: 'Éxito', detail: 'Se edito el Libro'}];
         this.recargarLibros.emit(true);

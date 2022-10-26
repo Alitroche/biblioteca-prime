@@ -44,7 +44,7 @@ import { ConfirmationService} from 'primeng/api';
     MessagesModule,
     ConfirmDialogModule
   ],
-  providers: [],
+  providers: [ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -52,7 +52,6 @@ export class LibrosComponent implements OnInit {
   }
 
   editar(libro: Libro){
-    this.formLibro.idactual = Number(libro.id);
     this.formLibro.codigo = libro.id;
     this.formLibro.titulo = libro.titulo;
     this.formLibro.autor = libro.autor;

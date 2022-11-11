@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Message } from 'primeng/api';
+import { Autor } from 'src/app/interfaces/autor.interface';
 import { Libro } from 'src/app/interfaces/libro.interfaces';
+import { AutoresService } from 'src/app/servicios/autores.service';
 import { LibrosService } from 'src/app/servicios/libros.service'
 
 @Component({
@@ -10,9 +12,10 @@ import { LibrosService } from 'src/app/servicios/libros.service'
 })
 export class FormularioLibroComponent implements OnInit {
 
+  idactual: number = 0;
   codigo: number | null = null;
   titulo: string | null = null;
-  autor: string | null = null;
+  idautor: number | null = null;
   paginas : number | null = null;
 
   codigoValido: boolean = true;
@@ -26,15 +29,33 @@ export class FormularioLibroComponent implements OnInit {
 
  modo: 'Registrar' | 'Editar' = 'Registrar';
 
+ listaAutores: Autor[] = [];
 
  @Output()
  recargarLibros: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
-     private servicioLibros: LibrosService
+     private servicioLibros: LibrosService,
+     private servicioAutores: AutoresService
    ){}
 
   ngOnInit(): void {
+    this.cargarAutores();
+  }
+
+  cargarAutores(){
+    this.servicioAutores.get().subscribe({
+    next: ( autores) => {
+      this.listaAutores = autores;
+    },
+    
+    error: (e) => {
+      console.log('Error al cargar autores');
+      console.log(e);
+      this.mensajes = [{severity: 'error', summary: 'Error al cargar autores', detail: e.error}];
+    }
+  });
+
   }
 
   guardar(){
@@ -43,7 +64,8 @@ export class FormularioLibroComponent implements OnInit {
       const libro: Libro= {
         id: this.codigo,
         titulo: this.titulo,
-        autor: this.autor,
+        idautor: this.idautor,
+        autor: null,
         paginas: this.paginas
 
       }
@@ -98,14 +120,14 @@ export class FormularioLibroComponent implements OnInit {
   validar():boolean{
     this.codigoValido = this.codigo !== null;
     this.tituloValido = this.titulo !== null && this.titulo?.length > 0;
-    this.autorValido = this.autor !== null && this.autor?.length > 0;
+    this.autorValido = this.idautor !== null;
     this.paginasValido = this.paginas !== null;
     return this.codigoValido && this.tituloValido && this.autorValido && this.paginasValido;
   }
   limpiarFormulario(){
     this.codigo = null;
     this.titulo = null;
-    this.autor = null;
+    this.idautor = null;
     this.paginas = null;
 
     this.codigoValido = true;

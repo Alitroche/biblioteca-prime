@@ -13,8 +13,11 @@
 </div>
 <div class="field">
     <label for="autor">Autor:</label>
-    <input id="autor" trype="text" class="w-full" [(ngModel)]="autor" pInputText
-    [ngClass]="{'ng-valido': !autorValido, 'nh-dirty': !autorValido}">
+
+    <p-dropdown id="autor" class="w-full" styleClass="w-full" [options]="listaAutores" [(ngModel)]="idautor" optionLabel="nombre" optionValue="id" [showClear]="true" placeholder="seleccionar..." [showClear]="true"></p-dropdown>
+
+    <!---<input id="autor" trype="text" class="w-full" [(ngModel)]="autor" pInputText
+    [ngClass]="{'ng-valido': !autorValido, 'nh-dirty': !autorValido}">--->
     <small *ngIf="!autorValido" id="autor-help" class="p-error block">Ingresar el autor del libror</small>
 </div>
 <div class="field">
